@@ -1,0 +1,15 @@
+a{
+    cursor: pointer;
+    text-decoration: none;
+    background: white;
+}
+
+.disabled{
+    background: grey;
+    cursor: not-allowed;
+}
+
+.cursor-not-allowed{
+    cursor: not-allowed;
+}
+

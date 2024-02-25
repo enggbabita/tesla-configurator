@@ -1,0 +1,23 @@
+<h3>Step 1: Choose your Model and Color</h3>
+<div class="">
+  <div class="d-flex">
+    <label for="modelSelect" class="form-label col-1">Model:</label>
+    <select class="col-4" id="modelSelect" (change)="onCarModelChange($event)" [(ngModel)]="selectedCarCode">
+      <option disabled value="default">Choose your model</option>
+      <option *ngFor="let model of carModels" [id]="model.code" [value]="model.code">
+        {{ model.description }}
+      </option>
+    </select>
+  </div>
+
+  <div class="d-flex" *ngIf="selectedCarCode != 'default'">
+    <label for="colorSelect" class="form-label col-1">Color:</label>
+    <select class="col-4" id="colorSelect" (change)="onCarColorChange($event)" [(ngModel)]="selectedColorCode">
+      <option *ngFor="let carColor of carColors" [value]="carColor.code">
+        {{ carColor.description }}
+      </option>
+    </select>
+  </div>
+</div>
+
+<img [src]="imageToShow" alt="Car image" *ngIf="selectedCarCode && selectedColorCode" />

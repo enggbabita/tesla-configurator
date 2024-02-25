@@ -1,0 +1,50 @@
+<h3>Step 2: Select your Config and Options</h3>
+<div>
+  <div class="d-flex">
+    <label for="configSelect" class="form-label">Config:</label>
+    <select class="col-4" id="configSelect" (change)="onConfigChange($event)" [(ngModel)]="selectedConfig.id">
+      <option disabled value="-1">Choose your configuration</option>
+      <option *ngFor="let item of configOptions.configs" [value]="item.id">
+        {{ item.description }}
+      </option>
+    </select>
+  </div>
+
+  <div class="d-flex">
+    <p *ngIf="selectedConfig?.range">
+      Range : <span>{{ selectedConfig.range }}</span> miles
+    </p>
+    <p *ngIf="selectedConfig?.speed">
+      Max Speed : <span>{{ selectedConfig.speed }}</span>
+    </p>
+    <p *ngIf="selectedConfig?.price">
+      Cost : <span>{{ selectedConfig.price | currency : "USD" }}</span>
+    </p>
+  </div>
+
+  <div class="form-check col-3 ms-2">
+    <label class="form-check-label" for="includeTow"> Tow hitch? </label>
+    <input
+      class="form-check-input"
+      type="checkbox"
+      id="includeTow"
+      [checked]="configOptions.towHitch"
+      (change)="updateTowHitch()"
+    />
+  </div>
+
+  <div class="form-check col-3 ms-2">
+    <label class="form-check-label" for="includeYoke">
+      Yoke Steering Wheel?
+    </label>
+    <input
+      class="form-check-input"
+      type="checkbox"
+      id="includeYoke"
+      [checked]="configOptions.yoke"
+      (change)="updateYoke()"
+    />   
+  </div>
+
+  <img [src]="imageUrl" alt="Car image" *ngIf="imageUrl"/>
+</div>
