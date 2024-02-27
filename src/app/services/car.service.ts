@@ -21,7 +21,7 @@ export class CarService {
     },
     imageUrl:'',
     isTowHitchAvailable: false,
-    isYokeAvailabe: false,
+    isYokeAvailable: false,
     configOptions: {
       config: {
         id: -1,

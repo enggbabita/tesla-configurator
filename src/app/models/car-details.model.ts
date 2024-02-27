@@ -9,7 +9,7 @@ export interface CarDetails {
   color: CarColor;
   imageUrl: string;
   isTowHitchAvailable: boolean;
-  isYokeAvailabe: boolean;
+  isYokeAvailable: boolean;
   configOptions: {
     towHitch: boolean;
     yoke: boolean;

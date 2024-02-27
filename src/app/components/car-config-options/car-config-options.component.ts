@@ -15,7 +15,7 @@ type CarConfigOptions = {
   towHitch: boolean,
   yoke: boolean,
   isTowHitchAvailable: boolean,
-  isYokeAvailabe: boolean
+  isYokeAvailable: boolean
 };
 
 @Component({
@@ -31,7 +31,7 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
     towHitch: false,
     yoke: false,
     isTowHitchAvailable: false,
-    isYokeAvailabe: false
+    isYokeAvailable: false
   };
 
   selectedConfig: ModelConfig = {
@@ -71,7 +71,7 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
         this.configOptions = {
           configs: configOptions.configs,
           isTowHitchAvailable: configOptions.towHitch,
-          isYokeAvailabe: configOptions.yoke,
+          isYokeAvailable: configOptions.yoke,
           towHitch: false,
           yoke: false
         };
