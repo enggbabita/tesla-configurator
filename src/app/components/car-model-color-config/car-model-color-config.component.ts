@@ -53,9 +53,7 @@ export class CarModelColorConfigComponent implements OnInit, OnDestroy {
         if (carDetails?.code && carDetails?.color?.code) {
           this.selectedCarCode = carDetails.code;
 
-          const carModel = this.carModels.find((item) => {
-            return item.code === this.selectedCarCode;
-          });
+          const carModel = this.findCarModel(this.carModels, this.selectedCarCode );
 
           if (carModel) {
             this.selectedCarModel = carModel;
@@ -78,9 +76,7 @@ export class CarModelColorConfigComponent implements OnInit, OnDestroy {
 
     const selectedCarCode = target.value;
 
-    const carModel = this.carModels.find((item) => {
-      return item.code === selectedCarCode;
-    });
+    const carModel = this.findCarModel(this.carModels, selectedCarCode );
 
     if (carModel) {
       this.selectedCarModel = carModel;
@@ -116,6 +112,12 @@ export class CarModelColorConfigComponent implements OnInit, OnDestroy {
 
     /* load car image */
     this.loadImageByURL();
+  }
+
+  findCarModel(carModels: CarModel[], carCode: string): CarModel | undefined  {
+    return this.carModels.find((item) => {
+      return item.code === this.selectedCarCode;
+    });
   }
 
   ngOnDestroy(): void {
