@@ -8,6 +8,8 @@ export interface CarDetails {
   description: string;
   color: CarColor;
   imageUrl: string;
+  isTowHitchAvailable: boolean;
+  isYokeAvailabe: boolean;
   configOptions: {
     towHitch: boolean;
     yoke: boolean;

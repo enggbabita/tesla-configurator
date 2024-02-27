@@ -20,6 +20,8 @@ export class CarService {
       price: 0,
     },
     imageUrl:'',
+    isTowHitchAvailable: false,
+    isYokeAvailabe: false,
     configOptions: {
       config: {
         id: -1,

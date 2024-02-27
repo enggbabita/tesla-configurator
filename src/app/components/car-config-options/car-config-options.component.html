@@ -22,7 +22,7 @@
     </p>
   </div>
 
-  <div class="form-check col-3 ms-2">
+  <div class="form-check col-3 ms-2" *ngIf="configOptions.isTowHitchAvailable">
     <label class="form-check-label" for="includeTow"> Tow hitch? </label>
     <input
       class="form-check-input"
@@ -33,7 +33,7 @@
     />
   </div>
 
-  <div class="form-check col-3 ms-2">
+  <div class="form-check col-3 ms-2" *ngIf="configOptions.isYokeAvailabe">
     <label class="form-check-label" for="includeYoke">
       Yoke Steering Wheel?
     </label>

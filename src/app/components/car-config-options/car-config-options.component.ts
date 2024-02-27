@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CarService } from '../../services/car.service';
 import {
-  CarModelConfigOption,
   ModelConfig,
 } from '../../models/car-model-config-option.model';
 import { CommonModule } from '@angular/common';
@@ -11,6 +10,14 @@ import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Subject, takeUntil } from 'rxjs';
 
+type CarConfigOptions = {
+  configs: Array<ModelConfig>,
+  towHitch: boolean,
+  yoke: boolean,
+  isTowHitchAvailable: boolean,
+  isYokeAvailabe: boolean
+};
+
 @Component({
   selector: 'app-car-config-options',
   standalone: true,
@@ -19,10 +26,12 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './car-config-options.component.scss',
 })
 export class CarConfigOptionsComponent implements OnInit, OnDestroy {
-  configOptions: CarModelConfigOption = {
+  configOptions: CarConfigOptions = {
     configs: [],
     towHitch: false,
     yoke: false,
+    isTowHitchAvailable: false,
+    isYokeAvailabe: false
   };
 
   selectedConfig: ModelConfig = {
@@ -59,8 +68,13 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
     this.dataService.getCarConfig(this.carDetails.code)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((configOptions) => {
-        this.configOptions = configOptions;
-
+        this.configOptions = {
+          configs: configOptions.configs,
+          isTowHitchAvailable: configOptions.towHitch,
+          isYokeAvailabe: configOptions.yoke,
+          towHitch: false,
+          yoke: false
+        };
         if (this.carDetails.configOptions.config.id > -1) {
           this.retainSelection();
         }
@@ -75,20 +89,14 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
 
   updateTowHitch() {
     this.configOptions.towHitch = !this.configOptions.towHitch;
-    this.carService.updateCarConfigOptions(
-      this.selectedConfig,
-      this.configOptions.towHitch,
-      this.configOptions.yoke
-    );
+
+    this.updateCarDetails();
   }
 
   updateYoke() {
     this.configOptions.yoke = !this.configOptions.yoke;
-    this.carService.updateCarConfigOptions(
-      this.selectedConfig,
-      this.configOptions.towHitch,
-      this.configOptions.yoke
-    );
+
+    this.updateCarDetails();
   }
 
   onConfigChange(event: Event) {
@@ -101,12 +109,17 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
     });
     if (filteredConfig) {
       this.selectedConfig = filteredConfig;
-      this.carService.updateCarConfigOptions(
-        this.selectedConfig,
-        this.configOptions.towHitch,
-        this.configOptions.yoke
-      );
+
+      this.updateCarDetails();
     }
+  }
+
+  updateCarDetails() {
+    this.carService.updateCarConfigOptions(
+      this.selectedConfig,
+      this.configOptions.towHitch,
+      this.configOptions.yoke
+    );
   }
 
   ngOnDestroy(): void {
