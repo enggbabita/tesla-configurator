@@ -9,11 +9,11 @@
     <div class="col">
       {{ carDetails.configOptions.config.description }}
 
-      <div *ngIf="carDetails.configOptions.config?.range" class="">
+      <div *ngIf="carDetails.configOptions.config?.range" class="ms-3">
         Range : <span>{{ carDetails.configOptions.config.range }}</span> miles
       </div>
 
-      <div *ngIf="carDetails.configOptions.config?.speed">
+      <div *ngIf="carDetails.configOptions.config?.speed" class="ms-3">
         Max Speed : <span>{{ carDetails.configOptions.config.speed }}</span>
       </div>
     </div>
