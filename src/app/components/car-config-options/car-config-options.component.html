@@ -29,7 +29,7 @@
       type="checkbox"
       id="includeTow"
       [checked]="configOptions.towHitch"
-      (change)="updateTowHitch()"
+      (change)="updateTowHitch($event)"
     />
   </div>
 
@@ -42,7 +42,7 @@
       type="checkbox"
       id="includeYoke"
       [checked]="configOptions.yoke"
-      (change)="updateYoke()"
+      (change)="updateYoke($event)"
     />   
   </div>
 

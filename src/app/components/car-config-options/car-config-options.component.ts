@@ -75,28 +75,39 @@ export class CarConfigOptionsComponent implements OnInit, OnDestroy {
           towHitch: false,
           yoke: false
         };
+
         if (this.carDetails.configOptions.config.id > -1) {
-          this.retainSelection();
+          this.retainConfigSelection();
         }
+
+        this.retainOptionSelection();
       });
   }
 
-  retainSelection() {
-    this.selectedConfig = this.carDetails.configOptions.config;
+  retainOptionSelection() {
     this.configOptions.towHitch = this.carDetails.configOptions.towHitch;
     this.configOptions.yoke = this.carDetails.configOptions.yoke;
   }
 
-  updateTowHitch() {
-    this.configOptions.towHitch = !this.configOptions.towHitch;
+  retainConfigSelection() {
+    this.selectedConfig = this.carDetails.configOptions.config;
+  }
+
+  updateTowHitch(event: Event) {
+    this.configOptions.towHitch = this.getCheckedValue(event);
 
     this.updateCarDetails();
   }
 
-  updateYoke() {
-    this.configOptions.yoke = !this.configOptions.yoke;
+  updateYoke(event: Event) {
+    this.configOptions.yoke = this.getCheckedValue(event);
 
     this.updateCarDetails();
+  }
+
+  getCheckedValue(event: Event): boolean {
+    const target = event.target as HTMLInputElement;
+    return target.checked;
   }
 
   onConfigChange(event: Event) {
